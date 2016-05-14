@@ -13,7 +13,7 @@ public class ImageMaster {
     ArrayList<ImageID> actual;
     
     ImageMaster() throws MalformedURLException, IOException{
-        directory = "D:\\Övrigt\\Favourites";
+        directory = "D:\\Övrigt\\TaxReturnScans_2013";
         content = new ArrayList<>();
         File dir;
         dir = new File(directory);
