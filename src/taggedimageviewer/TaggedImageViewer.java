@@ -14,7 +14,13 @@ public class TaggedImageViewer {
         
         while(true){
             Thread.sleep(30);
-            view.update(view.getGraphics());
+            if (frame.hasFocus()){
+                if (frame.resized()){
+                    frame.updateSize();
+                    view.update();
+                }
+                view.draw();
+            }
         }
     }
 }

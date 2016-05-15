@@ -17,6 +17,8 @@ import java.util.logging.Logger;
 public class WindowFrame extends Frame implements KeyListener, WindowListener, MouseListener, MouseMotionListener{
     WindowComponent view;
     Graphics g;
+    int lastWidth, lastHeight;
+    
     public WindowFrame(WindowComponent view) throws IOException{
         this.view = view;
         setSize(800, 600);
@@ -25,78 +27,91 @@ public class WindowFrame extends Frame implements KeyListener, WindowListener, M
         addMouseListener(this);
         addMouseMotionListener(this);
         add(this.view);
+        setBackground(new Color(0xff181818));
         setVisible(true);
-        
-        view.redraw();
+        view.update();
         view.draw();
+        updateSize();
+    }
+    
+    public boolean resized(){
+        return lastWidth != getWidth() || lastHeight != getHeight();
+    }
+    
+    public void updateSize(){
+        lastWidth = getWidth();
+        lastHeight = getHeight();
     }
 
     @Override
     public void keyTyped(KeyEvent e) {}
 
     @Override
-    public void keyPressed(KeyEvent e) {
+    public void keyPressed(KeyEvent e){
         switch(e.getKeyChar()){
             default :   System.out.println("Unsupported key.");        
         }
     }
 
     @Override
-    public void keyReleased(KeyEvent e) {}
+    public void keyReleased(KeyEvent e){}
 
     @Override
-    public void windowOpened(WindowEvent e) {
+    public void windowOpened(WindowEvent e){
     }
 
     @Override
-    public void windowClosing(WindowEvent e) {
+    public void windowClosing(WindowEvent e){
         System.exit(0);
     }
 
     @Override
-    public void windowClosed(WindowEvent e) {}
+    public void windowClosed(WindowEvent e){}
 
     @Override
-    public void windowIconified(WindowEvent e) {
+    public void windowIconified(WindowEvent e){
         System.out.println("window iconified");
     }
 
     @Override
-    public void windowDeiconified(WindowEvent e) {}
+    public void windowDeiconified(WindowEvent e){}
 
     @Override
-    public void windowActivated(WindowEvent e) {}
-
-    @Override
-    public void windowDeactivated(WindowEvent e) {}
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        System.out.println("mouse clicked");
-        view.draw();
-        try {
-            view.redraw();
-        } catch (IOException ex) {
-            Logger.getLogger(WindowFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public void windowActivated(WindowEvent e){
+        System.out.println("activated");
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {}
+    public void windowDeactivated(WindowEvent e){}
 
     @Override
-    public void mouseReleased(MouseEvent e) {}
+    public void mouseClicked(MouseEvent e){
+        System.out.println("mouse clicked");
+        try {
+            view.update();
+        } catch (IOException ex){
+            Logger.getLogger(WindowFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        view.draw();
+    }
 
     @Override
-    public void mouseEntered(MouseEvent e) {}
+    public void mousePressed(MouseEvent e){
+        System.out.println("pressed");
+    }
 
     @Override
-    public void mouseExited(MouseEvent e) {}
+    public void mouseReleased(MouseEvent e){}
 
     @Override
-    public void mouseDragged(MouseEvent e) {}
+    public void mouseEntered(MouseEvent e){}
 
     @Override
-    public void mouseMoved(MouseEvent e) {}
+    public void mouseExited(MouseEvent e){}
 
+    @Override
+    public void mouseDragged(MouseEvent e){}
+
+    @Override
+    public void mouseMoved(MouseEvent e){}
 }
