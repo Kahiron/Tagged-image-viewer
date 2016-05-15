@@ -41,6 +41,7 @@ public class WindowFrame extends Frame implements KeyListener, WindowListener, M
     public void updateSize(){
         lastWidth = getWidth();
         lastHeight = getHeight();
+        view.updateSize();
     }
 
     @Override
@@ -110,7 +111,9 @@ public class WindowFrame extends Frame implements KeyListener, WindowListener, M
     public void mouseExited(MouseEvent e){}
 
     @Override
-    public void mouseDragged(MouseEvent e){}
+    public void mouseDragged(MouseEvent e){
+        System.out.println("dragged");
+    }
 
     @Override
     public void mouseMoved(MouseEvent e){}
